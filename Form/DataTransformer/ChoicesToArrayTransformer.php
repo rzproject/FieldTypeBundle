@@ -1,13 +1,11 @@
 <?php
 
-
 namespace Rz\FieldTypeBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
-
 
 class ChoicesToArrayTransformer implements DataTransformerInterface
 {
@@ -52,11 +50,9 @@ class ChoicesToArrayTransformer implements DataTransformerInterface
 
         $indexMap = array_flip($this->choiceList->getIndicesForChoices($array));
 
-
         foreach ($this->choiceList as $i => $value) {
             $values[$i] = isset($indexMap[$i]);
         }
-
 
         return $values;
     }

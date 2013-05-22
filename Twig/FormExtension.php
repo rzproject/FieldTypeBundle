@@ -40,6 +40,7 @@ class FormExtension extends \Twig_Extension
                 }
             }
         }
+
         return;
     }
 

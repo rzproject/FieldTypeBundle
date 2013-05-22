@@ -24,12 +24,11 @@ class CheckboxType extends AbstractTypeExtension
             $view->vars['switch_enabled'] =  false;
             $view->vars['switch_attr'] =  null;
             //* TODO: enable via config
-            if($view->vars['uniform_endabled']) {
+            if ($view->vars['uniform_endabled']) {
                 $view->vars['attr']['class'] = array_key_exists('class', $view->vars['attr']) ? sprintf("uni_style_checkbox %s", $view->vars['attr']['class']) : "uni_style_checkbox";
             }
         }
     }
-
 
     /**
      * {@inheritdoc}
@@ -51,7 +50,6 @@ class CheckboxType extends AbstractTypeExtension
                                )
         );
     }
-
 
     /**
      * {@inheritdoc}

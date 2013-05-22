@@ -15,11 +15,10 @@ class RadioType extends AbstractTypeExtension
         $view->vars['uniform_endabled'] = array_key_exists('uniform_endabled', $options) ? $options['uniform_endabled'] : true;
 
         //* TODO: enable via config
-        if($view->vars['uniform_endabled']) {
+        if ($view->vars['uniform_endabled']) {
             $view->vars['attr']['class'] = array_key_exists('class', $view->vars['attr']) ? sprintf("uni_style_radio %s", $view->vars['attr']['class']) : "uni_style_radio";
         }
     }
-
 
     /**
      * {@inheritdoc}

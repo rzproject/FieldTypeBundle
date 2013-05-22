@@ -28,8 +28,8 @@ class RzFieldTypeExtension extends Extension
         $this->registerService($config, $container);
     }
 
-    protected function registerService(array $config, ContainerBuilder $container) {
-
+    protected function registerService(array $config, ContainerBuilder $container)
+    {
         $container->setParameter('twig.form.resources',
                                  array_merge($container->getParameter('twig.form.resources'),
                                              array('RzFieldTypeBundle::fields.html.twig')
