@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+
+    <parameters>
+        <parameter key="rz_field_type.date.class">Rz\FieldTypeBundle\Form\Type\Core\DateType</parameter>
+        <parameter key="rz_field_type.checkbox.class">Rz\FieldTypeBundle\Form\Type\Core\CheckboxType</parameter>
+        <parameter key="rz_field_type.radio.class">Rz\FieldTypeBundle\Form\Type\Core\RadioType</parameter>
+        <parameter key="rz_field_type.time.class">Rz\FieldTypeBundle\Form\Type\Core\TimeType</parameter>
+        <parameter key="rz_field_type.datetime.class">Rz\FieldTypeBundle\Form\Type\Core\DateTimeType</parameter>
+        <parameter key="rz_field_type.file.class">Rz\FieldTypeBundle\Form\Type\Core\FileType</parameter>
+        <!-- custom -->
+        <parameter key="rz_field_type.choice.class">Rz\FieldTypeBundle\Form\Type\Core\ChoiceType</parameter>
+    </parameters>
+
+    <services>
+        <service id="rz_field_type.date" class="%rz_field_type.date.class%">
+            <tag name="form.type_extension" alias="date" />
+        </service>
+
+        <service id="rz_field_type.checkbox" class="%rz_field_type.checkbox.class%">
+            <tag name="form.type_extension" alias="checkbox" />
+        </service>
+
+        <service id="rz_field_type.radio" class="%rz_field_type.radio.class%">
+            <tag name="form.type_extension" alias="radio" />
+        </service>
+
+        <service id="rz_field_type.time" class="%rz_field_type.time.class%">
+            <tag name="form.type_extension" alias="time" />
+        </service>
+
+        <service id="rz_field_type.datetime" class="%rz_field_type.datetime.class%">
+            <tag name="form.type_extension" alias="datetime" />
+        </service>
+
+        <service id="rz_field_type.file" class="%rz_field_type.file.class%">
+            <tag name="form.type_extension" alias="file" />
+        </service>
+
+        <!-- custom -->
+        <service id="rz_field_type.choice" class="%rz_field_type.choice.class%">
+            <tag name="form.type_extension" alias="choice" />
+        </service>
+    </services>
+</container>
