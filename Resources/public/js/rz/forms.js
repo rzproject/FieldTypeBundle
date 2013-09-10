@@ -13,15 +13,15 @@ jQuery(document).ready(function(){
 //* enhanced select elements
 var rz_chosen = {
     init: function(){
-        jQuery(".chzn-select").chosen({
+        jQuery(".chosen-select").chosen({
             allow_single_deselect: true
         });
-        jQuery(".chzn-select-multiple").chosen().change(function(){
+        jQuery(".chosen-select-multiple").chosen().change(function(){
             console.log(this);
             console.log('parent');
 
             var ret = null;
-            $(this).find('.chzn-choices').each(function(){
+            $(this).find('.chosen-choices').each(function(){
                 console.log(this);
                 console.log('child');
 //                var selectedValue = $(this).find('span').text();
