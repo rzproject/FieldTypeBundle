@@ -35,7 +35,7 @@ class ChoiceType extends AbstractTypeExtension
                 $view->vars['multiselect_search_enabled'] = $options['multiselect_search_enabled'] = false;
 
                 $view->vars['attr']['data-class-width'] = $view->vars['attr']['class'];
-                $view->vars['attr']['class'] = sprintf(($options['multiple']) ? "chosen-select-multiple %s" : "chosen-select %s", $view->vars['attr']['class']);
+                $view->vars['attr']['class'] = sprintf("chosen-select %s", $view->vars['attr']['class']);
                 $view->vars['attr']['chosen_data_placeholder'] = array_key_exists('chosen_data_placeholder', $options) ? $options['chosen_data_placeholder'] : 'Choose one of the following...';
                 $view->vars['attr']['chosen_no_results_text'] = array_key_exists('chosen_no_results_text', $options) ? $options['chosen_no_results_text'] : 'No record found.';
 
@@ -86,6 +86,7 @@ class ChoiceType extends AbstractTypeExtension
             $view->vars['chosen_enabled'] = $options['chosen_enabled'] = false;
             $view->vars['multiselect_enabled'] = true;
             $view->vars['multiselect_search_enabled'] = false;
+            $view->vars['attr']['multiple'] = 'multiple';
 
             if (array_key_exists('class', $view->vars['attr'])) {
                 $view->vars['attr']['class'] = sprintf("multiselect %s", $view->vars['attr']['class']);
