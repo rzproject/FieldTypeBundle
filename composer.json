@@ -23,8 +23,7 @@
     "target-dir": "Rz/FieldTypeBundle",
     "extra": {
         "branch-alias": {
-            "dev-2.2": "2.2.x-dev",
-            "dev-master": "2.3.x-dev"
+            "dev-2.3.1": "2.3.1.x-dev"
         }
     }
 }
