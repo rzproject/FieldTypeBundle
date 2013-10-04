@@ -190,13 +190,25 @@
 
         {% if thumbnail_enabled %}
         <div class="fileupload fileupload-new" data-provides="fileupload">
-            <div class="fileupload-preview thumbnail" style="width: 200px; height: 150px; line-height: 150px;">
+            <div class="fileupload-preview thumbnail">
                 {% if current_subject %}{% media current_subject, 'admin' %}{% endif %}
             </div>
             <div>
-                <span class="btn btn-file btn-primary sepV_a"><span class="fileupload-new"><i class="icon-file-alt"></i> Select image</span>
-                <span class="fileupload-exists"><i class="icon-undo"></i> Change</span>{{ form_widget(form) }}</span>
-                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="icon-trash"></i> Remove</a>
+                <span class="btn btn-file btn-success">
+                    <span class="fileupload-new">
+                        <i class="icon-file-alt"></i>
+                        <span class="hidden-phone hidden-tablet visible-desktop"> Select image</span>
+                    </span>
+                    <span class="fileupload-exists">
+                        <i class="icon-undo"></i>
+                        <span class="hidden-phone hidden-tablet visible-desktop"> Change</span>
+                    </span>
+                    {{ form_widget(form) }}
+                </span>
+                <button href="#" class="btn btn-success fileupload-exists" data-dismiss="fileupload">
+                    <i class="icon-trash"></i>
+                    <span class="hidden-phone hidden-tablet visible-desktop"> Remove</span>
+                </button>
             </div>
         </div>
         {% else %}
