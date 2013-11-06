@@ -6,8 +6,8 @@ jQuery(document).ready(function () {
 var rzadmin_fieldtype = {
 
     init:function(){
-        rzadmin_fieldtype.initChosen();
-        //rzadmin_fieldtype.resizeChosen();
+        //rzadmin_fieldtype.initChosen();
+        rzadmin_fieldtype.initSelect2();
         rzadmin_fieldtype.initSelectPicker();
         rzadmin_fieldtype.initDatePicker();
         rzadmin_fieldtype.initTimePicker();
@@ -35,7 +35,10 @@ var rzadmin_fieldtype = {
                 var $el = jQuery(this);
                 var search = ($el.attr("data-nosearch") === "true") ? true : false,
                     opt = {};
-                if(search) opt.disable_search_threshold = 9999999;
+                if(search) {
+                    opt.disable_search_threshold = 9999999;
+                }
+                opt.allow_single_deselect = true;
                 $el.chosen(opt);
             });
 
@@ -135,16 +138,20 @@ var rzadmin_fieldtype = {
     },
 
     resizeChosen: function(){
-
         if (jQuery('.chosen-container').length > 0){
-
             jQuery('.chosen-container').each(function() {
+                console.log('triggered');
                 var $el = jQuery(this);
-                var $id = $el.attr('id').replace('_chosen','');
-                var $chosen_class = jQuery('#'+$id).attr('data-class-width');
-                $el.css('width', null);
-                $el.addClass($chosen_class);
+                $el.css('width', $el.parent().width()+'px');
+                $el.find(".chosen-drop").css('width', ($el.parent().width()-2)+'px');
             });
+        }
+    },
+
+    initSelect2: function(id, options) {
+        //TODO: pass params via HTML tags
+        if (jQuery('.chosen-select').length > 0) {
+            jQuery('.chosen-select').select2();
         }
     }
 }
