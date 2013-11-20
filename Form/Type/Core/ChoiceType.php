@@ -65,9 +65,8 @@ class ChoiceType extends AbstractTypeExtension
             } else {
                 $view->vars['attr']['title'] = array_key_exists('selectpicker_title', $options) ? $options['selectpicker_title'] : 'Choose one of the following...';
             }
-            //$view->vars['selectpicker_selected_text_format'] = array_key_exists('selectpicker_selected_text_format', $options) ? $options['selectpicker_selected_text_format'] : 'values';
 
-            $view->vars['attr']['data-size'] = array_key_exists('selectpicker_data_size', $options) ? $options['selectpicker_data_size'] : '5';
+            $view->vars['attr']['data-size'] = array_key_exists('selectpicker_data_size', $options) ? $options['selectpicker_data_size'] : '4';
 
             if (array_key_exists('selectpicker_data_width', $options)) {
                 $view->vars['attr']['data-width'] = $options['selectpicker_data_width'];
