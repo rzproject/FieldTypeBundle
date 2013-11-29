@@ -14,8 +14,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "rmzamora/bootstrap-bundle": "2.3.1.*@dev",
-        "rmzamora/jquery-bundle": ">=1.9.1,<2.0"
+        "rmzamora/bootstrap-bundle": "~2.3.1",
+        "rmzamora/jquery-bundle": "~1.10.1"
     },
     "autoload": {
         "psr-0": { "Rz\\FieldTypeBundle": "" }
@@ -23,7 +23,7 @@
     "target-dir": "Rz/FieldTypeBundle",
     "extra": {
         "branch-alias": {
-            "dev-2.3.1": "2.3.1.x-dev"
+            "dev-master": "1.0.x-dev"
         }
     }
 }
