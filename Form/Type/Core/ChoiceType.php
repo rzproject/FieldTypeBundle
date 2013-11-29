@@ -25,22 +25,23 @@ class ChoiceType extends AbstractTypeExtension
         //* TODO: enable via config
         if ($options['expanded']) {
             $view->vars['selectpicker_enabled'] = $options['selectpicker_enabled']= false;
-            $view->vars['chosen_enabled'] = $options['chosen_enabled'] =  false;
+            $view->vars['select2'] = $options['select2'] =  false;
             $view->vars['multiselect_enabled'] = $options['multiselect_enabled'] = false;
             $view->vars['multiselect_search_enabled'] = $options['multiselect_search_enabled'] = false;
-        } elseif ($options['chosen_enabled']) {
+        } elseif ($options['select2']) {
                 $view->vars['selectpicker_enabled'] = $options['selectpicker_enabled']= false;
-                $view->vars['chosen_enabled'] = $options['chosen_enabled'] =  true;
+                $view->vars['select2'] = $options['select2'] =  true;
                 $view->vars['multiselect_enabled'] = $options['multiselect_enabled'] = false;
                 $view->vars['multiselect_search_enabled'] = $options['multiselect_search_enabled'] = false;
 
-                $view->vars['attr']['class'] = sprintf(($options['multiple']) ? "chzn-select-multiple %s" : "chzn-select %s", $view->vars['attr']['class']);
+                $view->vars['attr']['data-class-width'] = $view->vars['attr']['class'];
+                $view->vars['attr']['class'] = sprintf("chosen-select %s", $view->vars['attr']['class']);
                 $view->vars['attr']['chosen_data_placeholder'] = array_key_exists('chosen_data_placeholder', $options) ? $options['chosen_data_placeholder'] : 'Choose one of the following...';
                 $view->vars['attr']['chosen_no_results_text'] = array_key_exists('chosen_no_results_text', $options) ? $options['chosen_no_results_text'] : 'No record found.';
 
         } elseif ($options['selectpicker_enabled']) {
             $view->vars['selectpicker_enabled'] = $options['selectpicker_enabled'] = true;
-            $view->vars['chosen_enabled'] = $options['chosen_enabled'] = false;
+            $view->vars['select2'] = $options['select2'] = false;
             $view->vars['multiselect_enabled'] = $options['multiselect_enabled'] = false;
             $view->vars['multiselect_search_enabled'] = $options['multiselect_search_enabled'] = false;
 
@@ -64,9 +65,8 @@ class ChoiceType extends AbstractTypeExtension
             } else {
                 $view->vars['attr']['title'] = array_key_exists('selectpicker_title', $options) ? $options['selectpicker_title'] : 'Choose one of the following...';
             }
-            //$view->vars['selectpicker_selected_text_format'] = array_key_exists('selectpicker_selected_text_format', $options) ? $options['selectpicker_selected_text_format'] : 'values';
 
-            $view->vars['attr']['data-size'] = array_key_exists('selectpicker_data_size', $options) ? $options['selectpicker_data_size'] : '5';
+            $view->vars['attr']['data-size'] = array_key_exists('selectpicker_data_size', $options) ? $options['selectpicker_data_size'] : '4';
 
             if (array_key_exists('selectpicker_data_width', $options)) {
                 $view->vars['attr']['data-width'] = $options['selectpicker_data_width'];
@@ -82,9 +82,10 @@ class ChoiceType extends AbstractTypeExtension
         } elseif ($options['multiselect_enabled']) {
             $view->vars['multiple'] = true;
             $view->vars['selectpicker_enabled'] = $options['selectpicker_enabled'] = false;
-            $view->vars['chosen_enabled'] = $options['chosen_enabled'] = false;
+            $view->vars['select2'] = $options['select2'] = false;
             $view->vars['multiselect_enabled'] = true;
             $view->vars['multiselect_search_enabled'] = false;
+            $view->vars['attr']['multiple'] = 'multiple';
 
             if (array_key_exists('class', $view->vars['attr'])) {
                 $view->vars['attr']['class'] = sprintf("multiselect %s", $view->vars['attr']['class']);
@@ -92,13 +93,13 @@ class ChoiceType extends AbstractTypeExtension
         } elseif ($options['multiselect_search_enabled']) {
             $view->vars['multiple'] = true;
             $view->vars['selectpicker_enabled'] = $options['selectpicker_enabled'] = false;
-            $view->vars['chosen_enabled'] = $options['chosen_enabled'] = false;
+            $view->vars['select2'] = $options['select2'] = false;
             $view->vars['multiselect_enabled'] = false;
             $view->vars['multiselect_search_enabled'] = true;
 
         } else {
             $view->vars['selectpicker_enabled'] = $options['selectpicker_enabled'] = false;
-            $view->vars['chosen_enabled'] = $options['chosen_enabled'] = false;
+            $view->vars['select2'] = $options['select2'] = false;
             $view->vars['multiselect_enabled'] = $options['multiselect_enabled'] = false;
             $view->vars['multiselect_search_enabled'] = $options['multiselect_search_enabled'] = false;
         }
@@ -118,14 +119,14 @@ class ChoiceType extends AbstractTypeExtension
                                      'selectpicker_data_size',
                                      'selectpicker_disabled',
                                      'selectpicker_dropup',
-                                     'chosen_enabled',
+                                     'select2',
                                      'chosen_data_placeholder',
                                      'chosen_no_results_text',
                                      'multiselect_enabled',
                                      'multiselect_search_enabled',
                                     )
                               );
-        $resolver->setDefaults(array('chosen_enabled' => false,
+        $resolver->setDefaults(array('select2' => false,
                                      'selectpicker_enabled' => true,
                                      'multiselect_enabled' => false,
                                      'multiselect_search_enabled' => false,

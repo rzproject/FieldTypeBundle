@@ -55,8 +55,8 @@ class ChosenType extends AbstractType
                 ;
             } else {
                 $builder
-                    ->addViewTransformer(new ChoiceToBooleanArrayTransformer($options['choice_list']))
-                    ->addEventSubscriber(new FixRadioInputListener($options['choice_list']), 10)
+                    ->addViewTransformer(new ChoiceToBooleanArrayTransformer($options['choice_list'], false))
+                    ->addEventSubscriber(new FixRadioInputListener($options['choice_list'], false), 10)
                 ;
             }
         } else {
@@ -190,7 +190,7 @@ class ChosenType extends AbstractType
                                    'empty_data'        => $emptyData,
                                    'empty_value'       => $emptyValue,
                                    'error_bubbling'    => false,
-                                   'compound'          => $compound,
+                                   'compound'          => false,
                                    // The view data is always a string, even if the "data" option
                                    // is manually set to an object.
                                    // See https://github.com/symfony/symfony/pull/5582
