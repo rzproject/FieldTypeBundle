@@ -18,7 +18,7 @@
         "rmzamora/jquery-bundle": "~1.10.1"
     },
     "autoload": {
-        "psr-0": { "Rz\\FieldTypeBundle": "" }
+        "psr-4": { "Rz\\FieldTypeBundle\\": "" }
     },
     "target-dir": "Rz/FieldTypeBundle",
     "extra": {
