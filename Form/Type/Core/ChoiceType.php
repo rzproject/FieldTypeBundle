@@ -34,8 +34,8 @@ class ChoiceType extends AbstractTypeExtension
                 $view->vars['multiselect_enabled'] = $options['multiselect_enabled'] = false;
                 $view->vars['multiselect_search_enabled'] = $options['multiselect_search_enabled'] = false;
 
-                $view->vars['attr']['data-class-width'] = $view->vars['attr']['class'];
-                $view->vars['attr']['class'] = sprintf("chosen-select %s", $view->vars['attr']['class']);
+                $view->vars['attr']['data-class-width'] = isset($view->vars['attr']['class']) ?$view->vars['attr']['class']: null;
+                $view->vars['attr']['class'] = isset($view->vars['attr']['class']) ?sprintf("chosen-select %s", $view->vars['attr']['class']): null;
                 $view->vars['attr']['chosen_data_placeholder'] = array_key_exists('chosen_data_placeholder', $options) ? $options['chosen_data_placeholder'] : 'Choose one of the following...';
                 $view->vars['attr']['chosen_no_results_text'] = array_key_exists('chosen_no_results_text', $options) ? $options['chosen_no_results_text'] : 'No record found.';
 
