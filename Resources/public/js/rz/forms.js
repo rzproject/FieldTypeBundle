@@ -13,22 +13,26 @@ jQuery(document).ready(function(){
 //* enhanced select elements
 var rz_chosen = {
     init: function(){
-        jQuery(".chosen-select").chosen({
-            allow_single_deselect: true
-        });
-        jQuery(".chosen-select-multiple").chosen().change(function(){
-            console.log(this);
-            console.log('parent');
 
-            var ret = null;
-            $(this).find('.chosen-choices').each(function(){
+        if(jQuery(".chosen-select").length > 0 ) {
+            jQuery(".chosen-select").chosen({
+                allow_single_deselect: true
+            });
+            jQuery(".chosen-select-multiple").chosen().change(function(){
                 console.log(this);
-                console.log('child');
+                console.log('parent');
+
+                var ret = null;
+                $(this).find('.chosen-choices').each(function(){
+                    console.log(this);
+                    console.log('child');
 //                var selectedValue = $(this).find('span').text();
 //                ret.push(selectedValue);
-            })
-            //console.log(ret);
-        });
+                })
+                //console.log(ret);
+            });
+        }
+
     },
     initById: function(id, type){
         if(type == 'single') {
@@ -92,55 +96,54 @@ var rz_uniform_checkbox = {
 
 var rz_qtips = {
     init: function() {
-        if(!is_touch_device()){
-            var shared = {
-                style		: {
-                    classes: 'qtip-youtube'
-                },
-                show		: {
-                    delay: 100
-                },
-                hide		: {
-                    delay: 0
+
+        var shared = {
+            style		: {
+                classes: 'qtip-youtube'
+            },
+            show		: {
+                delay: 100
+            },
+            hide		: {
+                delay: 0
+            }
+        };
+        if($('.ttip_b').length) {
+            $('.ttip_b').qtip( $.extend({}, shared, {
+                position	: {
+                    my		: 'top center',
+                    at		: 'bottom center',
+                    viewport: $(window)
                 }
-            };
-            if($('.ttip_b').length) {
-                $('.ttip_b').qtip( $.extend({}, shared, {
-                    position	: {
-                        my		: 'top center',
-                        at		: 'bottom center',
-                        viewport: $(window)
-                    }
-                }));
-            }
-            if($('.ttip_t').length) {
-                $('.ttip_t').qtip( $.extend({}, shared, {
-                    position: {
-                        my		: 'bottom center',
-                        at		: 'top center',
-                        viewport: $(window)
-                    }
-                }));
-            }
-            if($('.ttip_l').length) {
-                $('.ttip_l').qtip( $.extend({}, shared, {
-                    position: {
-                        my		: 'right center',
-                        at		: 'left center',
-                        viewport: $(window)
-                    }
-                }));
-            }
-            if($('.ttip_r').length) {
-                $('.ttip_r').qtip( $.extend({}, shared, {
-                    position: {
-                        my		: 'left center',
-                        at		: 'right center',
-                        viewport: $(window)
-                    }
-                }));
-            };
+            }));
         }
+        if($('.ttip_t').length) {
+            $('.ttip_t').qtip( $.extend({}, shared, {
+                position: {
+                    my		: 'bottom center',
+                    at		: 'top center',
+                    viewport: $(window)
+                }
+            }));
+        }
+        if($('.ttip_l').length) {
+            $('.ttip_l').qtip( $.extend({}, shared, {
+                position: {
+                    my		: 'right center',
+                    at		: 'left center',
+                    viewport: $(window)
+                }
+            }));
+        }
+        if($('.ttip_r').length) {
+            $('.ttip_r').qtip( $.extend({}, shared, {
+                position: {
+                    my		: 'left center',
+                    at		: 'right center',
+                    viewport: $(window)
+                }
+            }));
+        };
     }
 };
 

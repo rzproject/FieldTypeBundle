@@ -29,7 +29,7 @@ class DateType extends AbstractTypeExtension
 
                 if ($view->vars['picker_use_js_init']) {
                     $view->vars['picker_class_attr'] =  $this->mergePickerAttr($options, true);
-                    $view->vars['picker_options'] = array_key_exists('picker_class_attr', $options) ? array_merge($options['picker_options'], array('autoclose'=>true)) : array('weekStart'=>0, 'viewMode'=>0, 'minViewMode'=>0, 'autoclose'=>true);
+                    $view->vars['picker_options'] = array_key_exists('picker_options', $options) ? array_merge($options['picker_options'], array('weekStart'=>0, 'viewMode'=>0, 'minViewMode'=>0, 'autoclose'=>true)) : array('weekStart'=>0, 'viewMode'=>0, 'minViewMode'=>0, 'autoclose'=>true);
                 } else {
                     $view->vars['picker_class_attr'] = $this->mergePickerAttr($options);
                 }
