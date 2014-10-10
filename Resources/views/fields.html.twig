@@ -26,12 +26,12 @@
 {% block form_widget_date %}
     {% spaceless %}
         <div class="row-fluid">
-        <div class="{{ picker_container_class }}" >
-            <div  {{ block('datepicker_attributes') }}>
-                <input type="text" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
-                <span class="add-on"><i class="icon-calendar"></i></span>
+            <div class="{{ picker_container_class }}" >
+                <div  {{ block('datepicker_attributes') }}>
+                    <input type="text" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+                    <span class="add-on"><i class="icon-calendar"></i></span>
+                </div>
             </div>
-        </div>
         </div>
     {% endspaceless %}
 {% endblock form_widget_date %}
