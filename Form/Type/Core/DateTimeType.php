@@ -70,7 +70,7 @@ class DateTimeType extends AbstractTypeExtension
                                    'date_format'         => 'MMMM dd, yyyy',
                                    'picker_settings'    => array('data-date-format'=>'MM dd, yyyy hh:ii'),
                                    'picker_container_class' => 'span5',
-                                   'error_bubbling'     => true
+                                   'error_bubbling'     => false
                                ));
     }
 
