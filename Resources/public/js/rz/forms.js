@@ -1,5 +1,5 @@
 jQuery(document).ready(function(){
-    rz_chosen.init();
+    //rz_chosen.init();
     rz_selectpicker.init();
     rz_datepicker.init();
     rz_uniform_checkbox.init();
