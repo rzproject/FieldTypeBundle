@@ -228,7 +228,7 @@
 {% block rz_google_maps_widget %}
     <div {{ block('widget_container_attributes') }}>
         {% block rz_google_maps_html %}
-            <div id="{{ id }}_container">
+            <div id="{{ id }}_container" class="gmap">
                 <div id="{{ id }}_current_position_container" class="input-append">
                     <input type="text" id="{{ id }}_input" />
                     <span id="{{ id }}_search_button" class="add-on"><i class="icon-search"></i></span>
