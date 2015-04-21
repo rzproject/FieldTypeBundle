@@ -14,6 +14,7 @@ namespace Rz\FieldTypeBundle\Form\Type\Core;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class RadioType extends AbstractTypeExtension
@@ -37,21 +38,38 @@ class RadioType extends AbstractTypeExtension
 
     /**
      * {@inheritdoc}
+     *
+     * @todo Remove it when bumping requirements to SF 2.7+
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setOptional(array('icheck_endabled',
-                                     'icheck_custom_label',
-                                     'icheck_data_skin',
-                                     'icheck_color',
-                                     'icheck_inline',
-                                     'uniform_endabled'));
+        $this->configureOptions($resolver);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $optionalOptions = array('icheck_endabled',
+            'icheck_custom_label',
+            'icheck_data_skin',
+            'icheck_color',
+            'icheck_inline',
+            'uniform_endabled');
+
+        if (method_exists($resolver, 'setDefined')) {
+            $resolver->setDefined($optionalOptions);
+        } else {
+            // To keep Symfony <2.6 support
+            $resolver->setOptional($optionalOptions);
+        }
 
         $resolver->setDefaults(array('icheck_endabled'=> true,
-                                     'icheck_custom_label'=> true,
-                                     'icheck_data_skin' => 'minimal',
-                                     'icheck_color' => 'aero',
-                                     'icheck_inline'=>true));
+            'icheck_custom_label'=> true,
+            'icheck_data_skin' => 'minimal',
+            'icheck_color' => 'aero',
+            'icheck_inline'=>true));
     }
 
     /**

@@ -14,6 +14,7 @@ namespace Rz\FieldTypeBundle\Form\Type\Core;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ChoiceType extends AbstractTypeExtension
@@ -107,32 +108,49 @@ class ChoiceType extends AbstractTypeExtension
 
     /**
      * {@inheritdoc}
+     *
+     * @todo Remove it when bumping requirements to SF 2.7+
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setOptional(array('selectpicker_enabled',
-                                     'selectpicker_data_style',
-                                     'selectpicker_title',
-                                     'selectpicker_selected_text_format',
-                                     'selectpicker_show_tick',
-                                     'selectpicker_data_width',
-                                     'selectpicker_data_size',
-                                     'selectpicker_disabled',
-                                     'selectpicker_dropup',
-                                     'select2',
-                                     'chosen_data_placeholder',
-                                     'chosen_no_results_text',
-                                     'multiselect_enabled',
-                                     'multiselect_search_enabled',
-                                    )
-                              );
+        $this->configureOptions($resolver);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $optionalOptions = array('selectpicker_enabled',
+                'selectpicker_data_style',
+                'selectpicker_title',
+                'selectpicker_selected_text_format',
+                'selectpicker_show_tick',
+                'selectpicker_data_width',
+                'selectpicker_data_size',
+                'selectpicker_disabled',
+                'selectpicker_dropup',
+                'select2',
+                'chosen_data_placeholder',
+                'chosen_no_results_text',
+                'multiselect_enabled',
+                'multiselect_search_enabled',
+        );
+
+        if (method_exists($resolver, 'setDefined')) {
+            $resolver->setDefined($optionalOptions);
+        } else {
+            // To keep Symfony <2.6 support
+            $resolver->setOptional($optionalOptions);
+        }
+
         $resolver->setDefaults(array('select2' => true,
-                                     'selectpicker_enabled' => false,
-                                     'multiselect_enabled' => false,
-                                     'multiselect_search_enabled' => false,
-                                     'error_bubbling'=> true
-                                     )
-                               );
+                'selectpicker_enabled' => false,
+                'multiselect_enabled' => false,
+                'multiselect_search_enabled' => false,
+                'error_bubbling'=> true
+            )
+        );
     }
 
     /**

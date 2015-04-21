@@ -14,7 +14,7 @@ namespace Rz\FieldTypeBundle\Form\Type\Core;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class DateTimeType extends AbstractTypeExtension
@@ -57,21 +57,39 @@ class DateTimeType extends AbstractTypeExtension
 
     /**
      * {@inheritdoc}
+     *
+     * @todo Remove it when bumping requirements to SF 2.7+
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $this->configureOptions($resolver);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
         /**
          * TODO: resolve date format difference
          */
-        $resolver->setOptional(array('picker_settings', 'picker_enable', 'picker_options', 'picker_use_js_init', 'picker_class_attr', 'picker_container_class'));
+        $optionalOptions = array('picker_settings', 'picker_enable', 'picker_options', 'picker_use_js_init', 'picker_class_attr', 'picker_container_class');
+
+        if (method_exists($resolver, 'setDefined')) {
+            $resolver->setDefined($optionalOptions);
+        } else {
+            // To keep Symfony <2.6 support
+            $resolver->setOptional($optionalOptions);
+        }
+
         $resolver->setDefaults(array(
-                                   'widget'         => 'single_text',
-                                   'format'         => 'MMMM dd, yyyy HH:mm',
-                                   'date_format'         => 'MMMM dd, yyyy',
-                                   'picker_settings'    => array('data-date-format'=>'MM dd, yyyy hh:ii'),
-                                   'picker_container_class' => 'span5',
-                                   'error_bubbling'     => false
-                               ));
+            'widget'         => 'single_text',
+            'format'         => 'MMMM dd, yyyy HH:mm',
+            'date_format'         => 'MMMM dd, yyyy',
+            'picker_settings'    => array('data-date-format'=>'MM dd, yyyy hh:ii'),
+            'picker_container_class' => 'span5',
+            'error_bubbling'     => false
+        ));
     }
 
     /**
