@@ -83,9 +83,9 @@ class DateType extends AbstractTypeExtension
 
         $resolver->setDefaults(array(
             'widget'         => 'single_text',
-            'format'         => 'MMMM dd, yyyy',
+            'format'         => 'dd-MM-yyyy',
             'input'          => 'datetime',
-            'picker_settings'    => array('data-date-format'=>'MM dd, yyyy'),
+            'picker_settings'    => array('data-date-format'=>'dd-mm-yyyy'),
             'picker_container_class' => 'span5',
             'error_bubbling'     => false
         ));
