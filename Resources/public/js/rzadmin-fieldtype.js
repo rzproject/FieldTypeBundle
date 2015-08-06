@@ -151,7 +151,7 @@ var rzadmin_fieldtype = {
     initSelect2: function(id, options) {
         //TODO: pass params via HTML tags
         if (jQuery('.chosen-select').length > 0) {
-            jQuery('select.chosen-select').select2();
+            jQuery('select.chosen-select').select2({ width: 'resolve' });
         }
     }
 }
