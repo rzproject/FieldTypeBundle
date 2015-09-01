@@ -14,7 +14,7 @@ namespace Rz\FieldTypeBundle\Form\Type\Core;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class TimeType extends AbstractTypeExtension
@@ -50,15 +50,33 @@ class TimeType extends AbstractTypeExtension
 
     /**
      * {@inheritdoc}
+     *
+     * @todo Remove it when bumping requirements to SF 2.7+
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        $this->configureOptions($resolver);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $optionalOptions = array('picker_enable', 'picker_options', 'picker_use_js_init');
+
+        if (method_exists($resolver, 'setDefined')) {
+            $resolver->setDefined($optionalOptions);
+        } else {
+            // To keep Symfony <2.6 support
+            $resolver->setOptional($optionalOptions);
+        }
+
         $resolver->setDefaults(array(
-                                   'widget'         => 'single_text',
-                                   'with_minutes'   => true,
-                                   'with_seconds'   => false,
-                               ));
-        $resolver->setOptional(array('picker_enable', 'picker_options', 'picker_use_js_init'));
+            'widget'         => 'single_text',
+            'with_minutes'   => true,
+            'with_seconds'   => false,
+        ));
     }
 
     /**

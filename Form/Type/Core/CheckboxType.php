@@ -14,6 +14,7 @@ namespace Rz\FieldTypeBundle\Form\Type\Core;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CheckboxType extends AbstractTypeExtension
@@ -46,32 +47,48 @@ class CheckboxType extends AbstractTypeExtension
 
     /**
      * {@inheritdoc}
+     *
+     * @todo Remove it when bumping requirements to SF 2.7+
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setOptional(array('icheck_endabled',
-                                     'icheck_custom_label',
-                                     'icheck_data_skin',
-                                     'icheck_color',
-                                     'icheck_inline',
-                                     'uniform_endabled',
-                                     'uniform_custom_label',
-                                     'switch_enabled',
-                                     'switch_attr',
-                                    )
-                              );
+        $this->configureOptions($resolver);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $optionalOptions= array('icheck_endabled',
+                'icheck_custom_label',
+                'icheck_data_skin',
+                'icheck_color',
+                'icheck_inline',
+                'uniform_endabled',
+                'uniform_custom_label',
+                'switch_enabled',
+                'switch_attr',
+        );
+
+        if (method_exists($resolver, 'setDefined')) {
+            $resolver->setDefined($optionalOptions);
+        } else {
+            // To keep Symfony <2.6 support
+            $resolver->setOptional($optionalOptions);
+        }
 
         $resolver->setDefaults(array('icheck_endabled'=> true,
-                                     'icheck_custom_label'=> true,
-                                     'icheck_data_skin' => 'minimal',
-                                     'icheck_color' => 'aero',
-                                     'icheck_inline'=>true,
-                                     'uniform_endabled' => true,
-                                     'uniform_custom_label' => true,
-                                     'switch_enabled' => false,
-                                     'switch_attr' => array('data-on-label'=>'ON', 'data-off-label'=>'OFF'),
-                                     'error_bubbling'=> true
-                               )
+                'icheck_custom_label'=> true,
+                'icheck_data_skin' => 'minimal',
+                'icheck_color' => 'aero',
+                'icheck_inline'=>true,
+                'uniform_endabled' => true,
+                'uniform_custom_label' => true,
+                'switch_enabled' => false,
+                'switch_attr' => array('data-on-label'=>'ON', 'data-off-label'=>'OFF'),
+                'error_bubbling'=> true
+            )
         );
     }
 

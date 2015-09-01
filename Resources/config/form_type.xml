@@ -14,6 +14,7 @@
         <parameter key="rz_field_type.file.class">Rz\FieldTypeBundle\Form\Type\Core\FileType</parameter>
         <!-- custom -->
         <parameter key="rz_field_type.choice.class">Rz\FieldTypeBundle\Form\Type\Core\ChoiceType</parameter>
+        <parameter key="rz_field_type.rz_google_maps.class">Rz\FieldTypeBundle\Form\Type\Custom\GoogleMapType</parameter>
     </parameters>
 
     <services>
@@ -44,6 +45,10 @@
         <!-- custom -->
         <service id="rz_field_type.choice" class="%rz_field_type.choice.class%">
             <tag name="form.type_extension" alias="choice" />
+        </service>
+
+        <service id="rz_field_type.rz_google_maps" class="%rz_field_type.rz_google_maps.class%">
+            <tag name="form.type" alias="rz_google_maps" />
         </service>
     </services>
 </container>

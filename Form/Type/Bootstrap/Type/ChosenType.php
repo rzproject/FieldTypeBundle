@@ -25,6 +25,7 @@ use Symfony\Component\Form\Extension\Core\DataTransformer\ChoiceToBooleanArrayTr
 use Symfony\Component\Form\Extension\Core\DataTransformer\ChoicesToValuesTransformer;
 use Symfony\Component\Form\Extension\Core\DataTransformer\ChoicesToBooleanArrayTransformer;
 use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ChosenType extends AbstractType
@@ -138,8 +139,18 @@ class ChosenType extends AbstractType
 
     /**
      * {@inheritdoc}
+     *
+     * @todo Remove it when bumping requirements to SF 2.7+
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $this->configureOptions($resolver);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
         $choiceListCache =& $this->choiceListCache;
 
@@ -183,27 +194,30 @@ class ChosenType extends AbstractType
         };
 
         $resolver->setDefaults(array(
-                                   'multiple'          => false,
-                                   'choice_list'       => $choiceList,
-                                   'choices'           => array(),
-                                   'preferred_choices' => array(),
-                                   'empty_data'        => $emptyData,
-                                   'empty_value'       => $emptyValue,
-                                   'error_bubbling'    => false,
-                                   'compound'          => false,
-                                   // The view data is always a string, even if the "data" option
-                                   // is manually set to an object.
-                                   // See https://github.com/symfony/symfony/pull/5582
-                                   'data_class'        => null,
-                               ));
+            'multiple'          => false,
+            'choice_list'       => $choiceList,
+            'choices'           => array(),
+            'preferred_choices' => array(),
+            'empty_data'        => $emptyData,
+            'empty_value'       => $emptyValue,
+            'error_bubbling'    => false,
+            'compound'          => false,
+            // The view data is always a string, even if the "data" option
+            // is manually set to an object.
+            // See https://github.com/symfony/symfony/pull/5582
+            'data_class'        => null,
+        ));
 
-        $resolver->setNormalizers(array(
-                                      'empty_value' => $emptyValueNormalizer,
-                                  ));
+        if (method_exists($resolver, 'setNormalizer')) {
+            $resolver->setNormalizer('empty_value', $emptyValueNormalizer);
+        } else {
+            // To keep Symfony <2.6 support
+            $resolver->setNormalizers(array('empty_value' => $emptyValueNormalizer));
+        }
 
         $resolver->setAllowedTypes(array(
-                                       'choice_list' => array('null', 'Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface'),
-                                   ));
+            'choice_list' => array('null', 'Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface'),
+        ));
     }
 
     /**
