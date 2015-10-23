@@ -287,3 +287,38 @@
         {% endblock %}
     </div>
 {% endblock %}
+
+{% block sonata_type_datetime_range_widget %}
+    {% spaceless %}
+        <div class="row-fluid">
+            <div class="{{ form.start.vars.picker_container_class }}" >
+                <label>From</label>
+                <div
+                    id="{{ form.start.vars.id }}"
+                    {% for attrname, attrvalue in form.start.vars.picker_class_attr %}{{ attrname }}="{{ attrvalue }}" {% endfor %}
+                    {% for settingsname, settingsvalue in form.start.vars.picker_settings %}{{ settingsname }}="{{ settingsvalue }}" {% endfor %}
+                     data-date="{{ form.start.vars.value }}">
+                    <input type="text" name="{{ form.start.vars.full_name }}" {% if form.start.vars.value is not empty %}value="{{ form.start.vars.value }}" {% endif %}/>
+                    <span class="add-on"><i class="icon-remove"></i></span>
+                    <span class="add-on"><i class="icon-calendar"></i></span>
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+  {% spaceless %}
+        <div class="row-fluid">
+            <div class="{{ form.end.vars.picker_container_class }}" >
+                <label>To</label>
+                <div
+                    id="{{ form.end.vars.id }}"
+                    {% for attrname, attrvalue in form.end.vars.picker_class_attr %}{{ attrname }}="{{ attrvalue }}" {% endfor %}
+                    {% for settingsname, settingsvalue in form.end.vars.picker_settings %}{{ settingsname }}="{{ settingsvalue }}" {% endfor %}
+                     data-date="{{ form.end.vars.value }}">
+                    <input type="text" name="{{ form.end.vars.full_name }}" {% if form.end.vars.value is not empty %}value="{{ form.end.vars.value }}" {% endif %}/>
+                    <span class="add-on"><i class="icon-remove"></i></span>
+                    <span class="add-on"><i class="icon-calendar"></i></span>
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock sonata_type_datetime_range_widget %}
